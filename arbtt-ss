@@ -1,0 +1,55 @@
+#! /bin/bash
+case "$1" in
+"week")
+	today=$(date +"%Y-%m-%d")
+	#echo $today
+	today=$(date -dlast-monday +%Y-%m-%d)
+        echo "$today to Now"
+	arbtt-stats  --filter='$date>='$today
+	#--each-category
+;;
+"today" )
+	today=$(date +"%Y-%m-%d")
+	echo "$today"
+	arbtt-stats  --filter='$date>='$today
+	#--each-category
+;;
+"month" )
+	today=$(date +"%Y-%m-01")
+	echo "$today to Now"
+	arbtt-stats  --filter='$date>='$today
+	#--each-category
+;;
+"prevmonth" )
+	startday=$(date --date="$(date +%Y-%m-15) -1 month" +'%Y-%m-01')
+ 	endday=$(date --date="$(date +%Y-%m-01) -1 day" +'%Y-%m-%d')
+	echo "$startday to $endday"
+	arbtt-stats  --filter='$date>='$startday' && $date<='$(date +%Y-%m-01)
+	#--each-category
+
+;;
+"prevday" )
+	startday=$(date --date="$(date +%Y-%m-%d) -1 day" +'%Y-%m-%d')
+ 	endday=$(date +%Y-%m-%d)
+	echo "$startday"
+	arbtt-stats  --filter='$date>='$startday' && $date<='$endday
+	#--each-category
+
+;;
+"-d" )
+	startday=$2
+ 	endday=$(date --date="$2 +1 day" +'%Y-%m-%d')
+	echo "$startday"
+	arbtt-stats  --filter='$date>='$startday' && $date<='$endday
+	#--each-category
+
+;;
+* )
+echo "Usage: arbtt [OPTIONS...]"
+echo " 	today"
+echo " 	week"
+echo " 	month"
+echo " 	prevmonth"
+echo " 	prevday"
+echo " 	-d [%Y-%m-%d]"
+esac
