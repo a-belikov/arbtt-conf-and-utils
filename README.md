@@ -2,15 +2,15 @@
 Config file for arbtt and wrap bash script 
 
 
-##categorize.cfg
+## categorize.cfg
 * Generate tag name by project opened in PHPStorm
 * Generate tag name by ssh server in terminal
 * Genearet tag by browser title
 * Generate tag by app name
 
 ...
-
-##arbtt-ss.sh bash script
+ 
+## arbtt-ss.sh bash script
  Stats for:
 *	today 
 *	week
